@@ -17,7 +17,9 @@ ch = conn.create_channel
 
 x = ch.default_exchange # publishes to all queues
 
-10.times do
+rigs = ARGV[1] || 10
+
+rigs.to_i.times do
   f_name = Faker::Name.unique.first_name
   l_name = Faker::Name.unique.last_name
   rating = {"name": name, "vote":1,"voter":{"first_name":f_name,"last_name":l_name}}
