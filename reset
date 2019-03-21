@@ -1,0 +1,6 @@
+#!/bin/bash
+read -r -p "Are you sure you want to reset the database? [y/N] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]
+then
+  docker-compose run api rake db:drop db:create db:migrate
+fi

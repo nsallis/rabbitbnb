@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker-compose run parser ruby rig_the_polls.rb "$@"
