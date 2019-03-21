@@ -12,7 +12,7 @@ conn.start
 ch = conn.create_channel
 x = ch.default_exchange
 # # x = Bunny::Exchange.new(ch, :fanout, "activity.events")
-q = ch.queue("ratings", exclusive: false, durable: true, auto_delete: false)
+q = ch.queue("ratings", exclusive: false, durable: false, auto_delete: false)
 
 q.subscribe(manual_ack: true, consumer_tag: "foo") do |delivery_info, properties, payload|
   puts "received #{payload}, message properties are #{properties.inspect}"
