@@ -11,10 +11,8 @@ conn.start
 
 ch = conn.create_channel
 x = ch.default_exchange
-puts "created exchange"
 # # x = Bunny::Exchange.new(ch, :fanout, "activity.events")
 q = ch.queue("ratings", exclusive: false, durable: true, auto_delete: false)
-puts "created queue"
 
 q.subscribe(manual_ack: true, consumer_tag: "foo") do |delivery_info, properties, payload|
   puts "received #{payload}, message properties are #{properties.inspect}"
@@ -29,12 +27,10 @@ request.body = properties[:headers].to_json
 
 # Send the request
 res = http.request(request)
-puts "got response from api: #{res.inspect}"
+puts "got response from api: #{res.body.to_json}"
 end
-puts "subscribed"
 #
 while true
-  puts "sleeping"
   sleep 5
 end
 puts "closing app"
