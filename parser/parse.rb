@@ -18,16 +18,16 @@ q.subscribe(manual_ack: true, consumer_tag: "foo") do |delivery_info, properties
   puts "received #{payload}, message properties are #{properties.inspect}"
   uri = URI.parse("http://api:3000/ratings")
 
-header = {'Content-Type': 'application/json'}
+  header = {'Content-Type': 'application/json'}
 
-# Create the HTTP objects
-http = Net::HTTP.new(uri.host, uri.port)
-request = Net::HTTP::Post.new(uri.request_uri, header)
-request.body = properties[:headers].to_json
+  # Create the HTTP objects
+  http = Net::HTTP.new(uri.host, uri.port)
+  request = Net::HTTP::Post.new(uri.request_uri, header)
+  request.body = properties[:headers].to_json
 
-# Send the request
-res = http.request(request)
-puts "got response from api: #{res.body.to_json}"
+  # Send the request
+  res = http.request(request)
+  puts "got response from api: #{res.body.to_json}"
 end
 #
 while true
